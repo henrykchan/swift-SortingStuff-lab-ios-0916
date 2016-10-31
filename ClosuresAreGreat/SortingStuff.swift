@@ -10,7 +10,7 @@ import Foundation
 
 
 struct ToyBin {
-    
+
     var ships: [Ship] = []
     var books: [Book] = []
     var bowlingPins: [BowlingPin] = []
@@ -18,8 +18,63 @@ struct ToyBin {
     
     // TODO: Implement all of the sort functions (lets organize this toy bin!)
     
- 
+    
+    
+    
+    
+    mutating func sortShips() {
+        ships = ships.sorted {$0.age > $1.age}
+        for (index,name) in ships.enumerated() {
+            if name.name == "Titanic"{
+                ships.remove(at: index)
+                ships.insert(name, at: 0)
+            }
+        }
+        
+    }
+    
+    mutating func sortBooks() {
+        
+        books = books.sorted { $0.name < $1.name }
+    }
+    
+    
+    mutating func sortBowlingPins() {
+        
+        bowlingPins = bowlingPins.sorted { $0.color.rawValue < $1.color.rawValue }
+            
+            //rawValue acts like an index for enums, therefore it is in order. Sorting this array in ascending order.
+    }
+    
+    
+    
+    
+    mutating func sortMusicCDs() {
+        
+        musicCDs = musicCDs.sorted {$0.name < $1.name}
+        
+        for (index,name) in musicCDs.enumerated() {
+            if name.name == "Drake" {
+                musicCDs.remove(at: index)
+                musicCDs.insert(name, at: 0)
+            }
+        }
+    }
+    
+    
+    
+    mutating func changeColorOfAllPins(to color: Color) {
+        
+        bowlingPins = bowlingPins.map {
+            
+            var firstArgument = $0
+            firstArgument.changeColor(to: color)
+            return firstArgument
+        }
+    }
 }
+
+
 
 
 struct Ship {
@@ -50,7 +105,7 @@ extension BowlingPin {
 
 
 enum Color: Int {
-    case red, organe, yellow, green, blue, indigo, violet
+    case red, orange, yellow, green, blue, indigo, violet
 }
 
 struct MusicCD {
@@ -58,3 +113,13 @@ struct MusicCD {
     var year: Int
     var songs: [String]
 }
+
+
+
+
+
+
+
+
+
+
